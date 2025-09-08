@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Link-in-Bio Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.7), rgba(69, 69, 70, 0.7)), url('https://themrshadow-alt.github.io/Pengu.net/ZFwoJ7.gif') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+    }
+    .profile-card {
+      background: rgba(31, 41, 55, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem auto;
+      border: 2px solid #1f1d20;
+      display: block;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      background: rgba(75, 85, 99, 0.6);
+      border-radius: 0.5rem;
+      color: #e5e7eb;
+      text-decoration: none;
+      transition: background 0.3s;
+      width: 100%;
+    }
+    .social-link:hover {
+      background: rgba(75, 85, 99, 0.8);
+    }
+    .social-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .audio-control {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #3b3641;
+      color: #e5e7eb;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .audio-control:hover {
+      background: #544e58;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      transition: opacity 0.5s;
+    }
+    .overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .overlay button {
+      padding: 1rem 2rem;
+      background: #4c4950;
+      color: #e5e7eb;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .overlay button:hover {
+      background: #666368;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="audioOverlay">
+    <button onclick="startAudio()">Click to Enter</button>
+  </div>
+  <div class="profile-card">
+    <img src="https://themrshadow-alt.github.io/Pengu.net/VRChat_2025-09-07_19-44-42.719_1920x1080.png" alt="Profile Picture" class="profile-img">
+    <h1 class="text-2xl font-bold text-gray-100">Your Name</h1>
+    <p class="text-gray-300 mb-4">Your short bio or description goes here.</p>
+    <div class="social-links">
+      <a href="https://vrchat.com/home/group/grp_d5131186-292f-4ad3-8d35-7c0691853c36" class="social-link">
+        <img src="https://img.icons8.com/?size=100&id=svxYTj1x2NIU&format=png&color=000000" alt="VRC Icon" class="social-icon">
+        VRChat
+      </a>
+      <a href="https://discord.gg/M5pBtAV8rs" class="social-link">
+        <img src="https://img.icons8.com/ios-filled/24/ffffff/discord-logo.png" alt="Discord Icon" class="social-icon">
+        Discord
+      </a>
+    </div>
+    <button class="audio-control" onclick="toggleAudio()">Pause Audio</button>
+  </div>
+
+  <audio id="backgroundAudio" loop>
+    <source src="https://themrshadow-alt.github.io/Pengu.net/3N31kTK_jY.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Audio control
+    const audio = document.getElementById('backgroundAudio');
+    const audioButton = document.querySelector('.audio-control');
+    const overlay = document.getElementById('audioOverlay');
+    let isPlaying = false;
+
+    // Set volume to maximum
+    audio.volume = 1.0;
+
+    function startAudio() {
+      audio.play().then(() => {
+        isPlaying = true;
+        audioButton.textContent = 'Pause Audio';
+        overlay.classList.add('hidden');
+      }).catch(e => {
+        console.log('Audio play failed:', e);
+        audioButton.textContent = 'Play Audio';
+      });
+    }
+
+    function toggleAudio() {
+      if (isPlaying) {
+        audio.pause();
+        audioButton.textContent = 'Play Audio';
+      } else {
+        audio.play().catch(e => console.log('Audio play failed:', e));
+        audioButton.textContent = 'Pause Audio';
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
+</body>
+</html>
